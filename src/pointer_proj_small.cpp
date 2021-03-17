@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : pointer_proj_small.cpp
-// Author      : 
+// Author      : pbaron
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
@@ -13,7 +13,52 @@ using namespace std;
 #include "../includes/stringmanip.h"
 #include "../includes/fileio.h"
 
+using namespace KP;
 
-int main(int argc, char *argv[]) {	
-//TODO add your content here
+int main(int argc, char *argv[]) {
+
+
+	if (*argv[0] == HELP_CHAR) {
+		cout << HELP_STRING1 << endl;
+		cout << HELP_STRING2 << endl;
+		return SUCCESS;
+	} else if (argc != EXPECTED_NUMBER_ARGUMENTS) {
+		cout << HELP_STRING2 << endl;
+		return FAIL_WRONG_NUMBER_ARGS;
+	} else {
+
+		string inpu = argv[0];
+		string outp = argv[1];
+		string tag = argv[2];
+		string tag_replacement = argv[3];
+		string string1 = "";
+
+		readFile(inpu, string1);
+
+		const char *src = string1.c_str();
+		const char *tmp_tag = tag.c_str();
+		int numOfTags = findNumbOccurrences(src,tmp_tag);
+
+		int len_str = strlen(src);
+		int len_tag = strlen(tmp_tag);
+		const char *tmp_tr = tag_replacement.c_str();
+		int len_tr = strlen(tmp_tr);
+		int memory = amountOfMemoryToAllocateForNewString(len_str, numOfTags, len_tag, len_tr);
+
+		char *string2 = new char[memory];
+
+		replace(src, string2, tmp_tag,tmp_tr);
+
+		string filename;
+		int write = writeFile(filename, string2);
+
+		return write;
+
+		if(string2){
+			delete [] string2;
+			string2 =0;
+		}
+
+	}
+	return SUCCESS;
 }
