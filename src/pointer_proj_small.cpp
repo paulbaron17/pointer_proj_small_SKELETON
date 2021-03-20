@@ -27,10 +27,11 @@ int main(int argc, char *argv[]) {
 		return FAIL_WRONG_NUMBER_ARGS;
 	} else {
 
-		string inpu = argv[0];
-		string outp = argv[1];
-		string tag = argv[2];
-		string tag_replacement = argv[3];
+		string inpu = argv[1];
+
+		string outp = argv[2];
+		string tag = argv[3];
+		string tag_replacement = argv[4];
 		string string1 = "";
 
 		readFile(inpu, string1);
@@ -45,19 +46,16 @@ int main(int argc, char *argv[]) {
 		int len_tr = strlen(tmp_tr);
 		int memory = amountOfMemoryToAllocateForNewString(len_str, numOfTags, len_tag, len_tr);
 
-		char *string2 = new char[memory];
+		char tmp[memory] = "";
+		char *string2 = tmp;
+
 
 		replace(src, string2, tmp_tag,tmp_tr);
 
 		string filename;
-		int write = writeFile(filename, string2);
+		writeFile(outp, string2);
 
-		return write;
 
-		if(string2){
-			delete [] string2;
-			string2 =0;
-		}
 
 	}
 	return SUCCESS;

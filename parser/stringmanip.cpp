@@ -56,7 +56,10 @@ int replace(const char *src, char *new_src, const char *tag, const char *tag_rep
 				strncat((new_src + j), tag_replacement, tagr_len);
 				i+= tag_len;
 				j+=tagr_len;
+
+
 				*(new_src +j) = *(src + i);
+				j++;
 
 			}
 		}
