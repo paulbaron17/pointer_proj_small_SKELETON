@@ -59,10 +59,12 @@ int replace(const char *src, char *new_src, const char *tag, const char *tag_rep
 
 
 				*(new_src +j) = *(src + i);
-				j++;
 
 			}
 		}
+		*(new_src +j) = *(src + i);
+		j++;
+
 		i++;
 
 	}
