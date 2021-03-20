@@ -46,8 +46,8 @@ int main(int argc, char *argv[]) {
 		int len_tr = strlen(tmp_tr);
 		int memory = amountOfMemoryToAllocateForNewString(len_str, numOfTags, len_tag, len_tr);
 
-		char tmp[memory] = "";
-		char *string2 = tmp;
+		char *string2 = new char[memory];
+		memset(string2, 0, memory * sizeof(char));
 
 
 		replace(src, string2, tmp_tag,tmp_tr);
@@ -55,7 +55,10 @@ int main(int argc, char *argv[]) {
 		string filename;
 		writeFile(outp, string2);
 
-
+		if(string2){
+			delete [] string2;
+			string2 = 0;
+		}
 
 	}
 	return SUCCESS;
